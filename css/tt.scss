@@ -1,0 +1,361 @@
+/***********
+常用样式库 v1
+包含颜色、亮度、宽高、flex、gird、margin、padding、圆角、字体、动画
+***********/
+$widMax: 100%;
+
+
+/***********颜色:背景、文本***********/
+
+$colors:
+(name:red,value:#e54d42),
+(name:orange,value:#f37b1d),
+(name:yellow,value:#fbbd08),
+(name:olive,value:#8dc63f),
+(name:green,value:#39b54a),
+(name:cyan,value:#1cbbb4),
+(name:blue,value:#0081ff),
+(name:purple,value:#6739b6),
+(name:mauve,value:#9c26b0),
+(name:pink,value:#e03997),
+(name:brown,value:#a5673f),
+(name:grey,value:#8799a3),
+(name:black,value:#333333),
+(name:darkGray,value:#666666),
+(name:gray,value:#aaaaaa),
+(name:ghostWhite,value:#f1f1f1),
+(name:white,value:#ffffff),
+;
+
+@for $i from 1 through length($colors) {
+    $item:nth($colors, $i);
+    $name:map-get($map: $item, $key: name);
+    $value:map-get($map: $item, $key: value);
+    .bg-#{$name} {
+        background-color: $value;
+        @if $i<15 {
+            color:#fff;
+        } @else{
+            color:#000;
+        }
+    }
+    .txt-#{$name}{
+        color: $value;
+    }
+}
+
+
+/***********宽度***********/
+@for $i from 1 through 5 {
+    .wid-#{$i} {
+        width: 1% * $i;
+    }
+}
+
+@for $i from 1 through 10 {
+    .wid-#{$i*10} {
+        width: 10% * $i;
+    }
+}
+
+/***********高度***********/
+.hei-100 {
+    height: $widMax;
+}
+.wh-100 {
+    height: $widMax;
+    width: $widMax;
+}
+
+/***********margin***********/
+@for $i from 1 to 5 {
+    .mt-#{$i*10}{
+        margin-top: $i*10rpx;
+    }
+}
+
+
+/***********padding***********/
+@for $i from 1 to 5 {
+    .pd-#{$i*5}{
+        padding: $i*5rpx;
+    }
+}
+
+/***********圆角***********/
+@for $i from 1 to 5 {
+    .round-#{$i*5}{
+        border-radius: $i*5rpx;
+    }
+}
+.round-50{
+    border-radius: 50%;
+}
+/***********Flex布局***********/
+.row {
+    display: flex;
+    flex-direction: row;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.y-center {
+    align-items: center;
+}
+
+.x-center {
+    justify-content: center;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-start {
+    justify-content: flex-start;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.flex-between {
+    justify-content: space-between;
+}
+
+.flex-around {
+    justify-content: space-around;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+/***********grid***********/
+.grid{
+    display: grid;
+    flex-wrap: wrap;
+}
+
+@for $i from 1 to 6 {
+    .grid.col-#{$i}>view{
+        width: 100%/$i;
+    }
+}
+
+
+/***********文本***********/
+$texts:
+(name:sm,value:22),
+(name:df,value:28),
+(name:lg,value:32),
+(name:xl,value:36),
+(name:xxl,value:42),
+(name:sl,value:56),
+(name:sxl,value:88),
+;
+
+@for $i from 1 through length($texts){
+    $item:nth($texts,$i);
+    $name:map-get($map: $item, $key:name );
+    $value: map-get($map: $item, $key: value);
+    .txt-#{$name}{
+        font-size: $value*1rpx;
+    }
+}
+
+.txt-left {
+	text-align: left;
+}
+.txt-right {
+	text-align: right;
+}
+.txt-center {
+    text-align: center;
+}
+.txt-bold{
+    font-weight: 800;
+}
+.txt-space-3 {
+    letter-spacing: 3rpx;
+}
+.txt-Abc {
+	text-transform: Capitalize;
+}
+.txt-ABC {
+	text-transform: Uppercase;
+}
+.txt-abc {
+	text-transform: Lowercase;
+}
+.txtHide{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+/***********animation***********/
+[class*=ani-] {
+    animation-duration: .5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both
+}
+
+$animations:fade,scale-up,scale-down,slide-top,slide-bottom,slide-left,slide-right,shake;
+
+@for $i from 1 through length($animations) {
+    $item:nth($animations, $i);
+    .ani-#{$item}{
+        animation: $item;
+        @if $i==1 {
+            animation-duration: .8s;
+            animation-timing-function: linear
+        }
+    }
+}
+@keyframes fade {
+    0% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 1
+    }
+}
+
+@keyframes scale-up {
+    0% {
+        opacity: 0;
+        transform: scale(.2)
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+@keyframes scale-down {
+    0% {
+        opacity: 0;
+        transform: scale(1.8)
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+@keyframes slide-top {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+@keyframes slide-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0)
+    }
+
+    10% {
+        transform: translateX(-9px)
+    }
+
+    20% {
+        transform: translateX(8px)
+    }
+
+    30% {
+        transform: translateX(-7px)
+    }
+
+    40% {
+        transform: translateX(6px)
+    }
+
+    50% {
+        transform: translateX(-5px)
+    }
+
+    60% {
+        transform: translateX(4px)
+    }
+
+    70% {
+        transform: translateX(-3px)
+    }
+
+    80% {
+        transform: translateX(2px)
+    }
+
+    90% {
+        transform: translateX(-1px)
+    }
+}
+
+@keyframes slide-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+@keyframes slide-right {
+    0% {
+        opacity: 0;
+        transform: translateX(100%)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+/***********辅助交互***********/
+.btnClick{
+    position: relative;
+}
+.btnClick:active{
+    transform: translate(1px, 1px);
+}
+.pageShow{
+    opacity: 1;
+    z-index: 999;
+}
+.pageHide{
+    opacity: 0;
+    z-index: -999;
+}
+.shadow {
+	position: relative;
+	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+}
